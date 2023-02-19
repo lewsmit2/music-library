@@ -9,7 +9,16 @@ const createArtist = async(req, res) => {
     } catch (err) {
         res.status(500).json(err.message);
     }
-}
+};
 
-module.exports = {createArtist};
+const readArtist = async(_, res) => {
+    try {
+      const { rows } = await db.query(`SELECT * FROM artists`);
+      res.status(200).json(rows);
+    } catch (err) {
+        res.status(500).json(err.message);
+    }
+};
+
+module.exports = {createArtist, readArtist};
 

@@ -1,6 +1,6 @@
 const db = require('../../src/db/index');
 
-const createArtist = async(req, res) => {
+const createArtist = async (req, res) => {
     const { name, genre } = req.body;
 
     try {
@@ -11,7 +11,7 @@ const createArtist = async(req, res) => {
     }
 };
 
-const readArtist = async(_, res) => {
+const readArtist = async (_, res) => {
     try {
       const { rows } = await db.query(`SELECT * FROM artists`);
       res.status(200).json(rows);
@@ -20,5 +20,19 @@ const readArtist = async(_, res) => {
     }
 };
 
-module.exports = {createArtist, readArtist};
+const singleArtistById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { rows: [ artist ] } = await db.query(`SELECT * FROM artists WHERE id = $1`, [ id ]);
+
+        if (!artist) {
+            res.status(404).json({ message: `artist ${id} does not exist`});
+        }
+        res.status(200).json(artist);
+    } catch (err) {
+        res.status(500).json(err.message);
+    }
+};
+
+module.exports = {createArtist, readArtist, singleArtistById};
 

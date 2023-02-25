@@ -1,6 +1,6 @@
 ## Project title
 
-Music Library - exercise for SQL, databases and **CRUD** operations.
+Music Library - SQL, Databases, Express.js, Routing.
 
 ## Motivation
 
@@ -17,11 +17,11 @@ Music Library - exercise for SQL, databases and **CRUD** operations.
 | index.js           | process config env                        |
 | src/app.js         | process routers                           |
 | src/routes/\*      | process get/post/put/patch controllers    |
-| src/controllers/\* | process back-end controllers and response |
+| src/controllers/\* | process controllers and response |
 
 ### Database setup for each test:
 
-To ensure tests have a fresh database each time they run.
+To ensure tests have a new database created each time we run a test.
 
 ```
 // package.json
@@ -83,8 +83,6 @@ $ npm test
 
 From this exercise, you may learn how to handle request for CRUD operation to relational database.
 
-## Credits
-
 ### Recommended Reading List
 
 - [Node-postgres](https://node-postgres.com/)
@@ -94,9 +92,3 @@ From this exercise, you may learn how to handle request for CRUD operation to re
 - [Documentation - Dotenv](https://github.com/motdotla/dotenv/blob/master/README.md)
 - [Documentation - Nodemon](https://www.npmjs.com/package/nodemon)
 - [Preventing SQL Injection in Node.js](https://www.veracode.com/blog/secure-development/how-prevent-sql-injection-nodejs)
-
-## License
-
-Free license
-
-MCRCODES © [Lewis Smith]()

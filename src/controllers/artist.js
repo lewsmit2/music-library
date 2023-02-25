@@ -65,28 +65,20 @@ const patchArtistById = async (req, res) => {
 };
 
 const deleteArtistById = async (req, res) => {
-  const { id } = req.params;
-  const { name, genre } = req.body;
+    const { id } = req.params;
 
-  let query, params;
+    try {
+        const { rows: [ artist ] } = await db.query(`DELETE FROM Artists WHERE id = $1 RETURNING *`, [ id ]);
 
-  if (name && genre) {
-    query = `DELETE FROM Artists WHERE name = $1, genre = $2, id = $3 RETURNING *`;
-    params = [name, id];
-  }
+        if (!artist) {
+            res.status(404).json( {message: `artist ${id} does not exist` });
+        }
 
-  try {
-    const { rows: [ artist ] } = await db.query(query, params);
-
-    if (!artist) {
-        res.status(404).json({ message: `artist ${id} does not exist`});
+        res.status(200).json(artist);
+    }  catch (err) {
+        res.status(500).json(err.message);
     }
 
-    res.status(200).json(artist);
-  } catch (err) {
-    res.status(500).json(err.message);
-  }
 };
 
 module.exports = {createArtist, readArtist, singleArtistById, patchArtistById, deleteArtistById};
-

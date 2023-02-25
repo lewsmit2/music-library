@@ -62,8 +62,31 @@ const patchArtistById = async (req, res) => {
         } catch (err) {
             res.status(500).json(err.message);
         }
+};
+
+const deleteArtistById = async (req, res) => {
+  const { id } = req.params;
+  const { name, genre } = req.body;
+
+  let query, params;
+
+  if (name && genre) {
+    query = `DELETE FROM Artists WHERE name = $1, genre = $2, id = $3 RETURNING *`;
+    params = [name, id];
+  }
+
+  try {
+    const { rows: [ artist ] } = await db.query(query, params);
+
+    if (!artist) {
+        res.status(404).json({ message: `artist ${id} does not exist`});
     }
 
+    res.status(200).json(artist);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+};
 
-module.exports = {createArtist, readArtist, singleArtistById, patchArtistById};
+module.exports = {createArtist, readArtist, singleArtistById, patchArtistById, deleteArtistById};
 

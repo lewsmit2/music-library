@@ -45,7 +45,6 @@ describe('Update Album', () => {
         ])
 
         album = albumData.map(({ rows }) => rows[0]);
-        console.log(album);
     })
 
     describe('PATCH /albums/{id}', () => {

@@ -10,4 +10,6 @@ router.get('/:id', albumsController.singleAlbumById);
 
 router.patch('/:id', albumsController.patchAlbumById);
 
+router.delete('/:id', albumsController.deleteAlbumById);
+
 module.exports = router;

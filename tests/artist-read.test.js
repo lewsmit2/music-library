@@ -7,15 +7,18 @@ describe('Read Artists', () => {
     let artists;
     beforeEach(async () => {
         const responses = await Promise.all([
-            db.query('INSERT INTO Artists (name, genre) VALUES( $1, $2) RETURNING *', [
+            db.query('INSERT INTO Artists (name, genre) VALUES( $1, $2) RETURNING *', 
+            [
                 'Tame Impala',
                 'rock',
             ]),
-            db.query('INSERT INTO Artists (name, genre) VALUES( $1, $2) RETURNING *', [
+            db.query('INSERT INTO Artists (name, genre) VALUES( $1, $2) RETURNING *', 
+            [
                 'Kylie Minogue',
                 'pop',
             ]),
-            db.query('INSERT INTO Artists (name, genre) VALUES( $1, $2) RETURNING *', [
+            db.query('INSERT INTO Artists (name, genre) VALUES( $1, $2) RETURNING *', 
+            [
                 'Tame Antelope',
                 'jazz',
             ]),
@@ -26,7 +29,9 @@ describe('Read Artists', () => {
 
     describe('GET /artists', () => {
         it('returns all artist records in the database', async () => {
-            const { status, body } = await request(app).get('/artists').send();
+            const { status, body } = await request(app)
+              .get('/artists')
+              .send();
 
             expect(status).to.equal(200);
             expect(body.length).to.equal(3);
@@ -41,13 +46,17 @@ describe('Read Artists', () => {
 
     describe('GET /artists/{id}', () => {
         it('returns the artist with the correct id', async () => {
-            const { status, body } = await request(app).get(`/artists/${artists[0].id}`).send();
+            const { status, body } = await request(app)
+              .get(`/artists/${artists[0].id}`)
+              .send();
 
             expect(status).to.equal(200);
             expect(body).to.deep.equal(artists[0]);
         });
         it('returns a 404 if the artist does not exist', async () => {
-            const { status, body } = await request(app).get('/artists/999999999').send();
+            const { status, body } = await request(app)
+              .get('/artists/999999999')
+              .send();
 
             expect(status).to.equal(404);
             expect(body.message).to.equal('artist 999999999 does not exist');

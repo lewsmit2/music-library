@@ -19,7 +19,9 @@ describe('create album', () => {
     describe('/albums', () => {
         describe('POST', () => {
             it('creates a new album in the database', async () => {
-                const { status, body } = await request(app).post(`/artists/${artistId}/albums`).send(
+                const { status, body } = await request(app)
+                  .post(`/artists/${artistId}/albums`)
+                  .send(
                   {
                     name: 'Nevermind',
                     year: 1991,
@@ -29,7 +31,6 @@ describe('create album', () => {
                 expect(status).to.equal(201);
                 expect(body.name).to.equal('Nevermind');
                 expect(body.year).to.equal(1991);
-                console.log(artistId);
                 
                 const {
                     rows: [albumData],

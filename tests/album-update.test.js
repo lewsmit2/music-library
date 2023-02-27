@@ -13,10 +13,11 @@ describe('Update Album', () => {
 
         artistData = await Promise.all([
             db.query(
-                `INSERT INTO Artists (name, genre) VALUES ($1, $2) RETURNING *`, [
+                `INSERT INTO Artists (name, genre) VALUES ($1, $2) RETURNING *`, 
+                [
                     'Nevermind',
                     'rock',
-            ]),
+                ]),
         ]);
             artist = artistData.map(({ rows }) => rows[0]);
             singleArtistId = artist[0].id;

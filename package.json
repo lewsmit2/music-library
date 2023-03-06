@@ -13,7 +13,7 @@
     "posttest": "node scripts/drop-database.js test"
   },
   "engines": {
-    "node": ">=14 <15"
+    "node": ">=14.21.3"
   },
   "repository": {
     "type": "git",

@@ -9,28 +9,28 @@ services:
     envVars:
       - key: PGDATABASE
         fromDatabase:
-          name: music-library-datbase-ls-oct22
+          name: music_library_dev
           property: database
       - key: PGUSER
         fromDatabase:
-          name: music-library-datbase-ls-oct22
+          name: music_library_dev
           property: user
       - key: PGPASSWORD
         fromDatabase:
-          name: music-library-datbase-ls-oct22
+          name: music_library_dev
           property: password
       - key: PGHOST
         fromDatabase:
-          name: music-library-datbase-ls-oct22
+          name: music_library_dev
           property: host
       - key: PGPORT
         fromDatabase:
-          name: music-library-datbase-ls-oct22
+          name: music_library_dev
           property: port
 
 databases:
-  - name: music-library-database-ls-oct22
+  - name: music_library_dev
     plan: free
     region: frankfurt
-    databaseName: music_library_dev
+    databaseName: music_library
     ipAllowList: []

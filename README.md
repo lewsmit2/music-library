@@ -4,23 +4,23 @@ Music Library
 
 ### Project Description
 
-This project aims to create a RESTful API that allows users to perform CRUD (Create, Read, Update, Delete) operations on an artists table and an albums table in a PostgreSQL database.  The database is contained in a Docker container using the official postgres image.  The project includes migration tables in the root of the project on Node; scripts for creating and dropping the database (dropping only during testing), and a migrate folder to choose whether to run the .env or .env.test file.  The project also includes controllers, routes, app.js, and utilises integration testing via Supertest, Mocha, and Chai.
+This project aims to create a RESTful API that allows users to perform CRUD (Create, Read, Update, Delete) operations on an artists table and an albums table in a PostgreSQL database. The database is contained in a Docker container using the official postgres image. The project includes migration tables in the root of the project on Node; scripts for creating and dropping the database (dropping only during testing), and a migrate folder to choose whether to run the .env or .env.test file. The project also includes controllers, routes, app.js, and utilises integration testing via Supertest, Mocha, and Chai.
 
 With this API, users can add, retrieve, update, and delete artists and albums from the database using HTTP methods, such as GET, POST, PATCH, and DELETE.
 
-The API is built using Node.js, Express.js, pg, and postgres-migrations.  The project is fully tested using the Mocha testing framework and the Chai assertion library, which ensures that the API works as expected and prevents regression bugs.
+The API is built using Node.js, Express.js, pg, and postgres-migrations. The project is fully tested using the Mocha testing framework and the Chai assertion library, which ensures that the API works as expected and prevents regression bugs.
 
 Overall, this project provides a robust an efficient solution for managing artists and albums in a PostgreSQL database through a RESTful API, with proper testing and documentation for each of use and maintenance.
 
 ## Installation of music library
 
 ```
-$ git clone https://github.com/lewsmit2/music-library.git 
+$ git clone https://github.com/lewsmit2/music-library.git
 $ cd music-library
 $ npm init -y
 ```
 
-  ### Install Dependencies 
+### Install Dependencies
 
 ```
 npm i -S express pg postgres-migrations
@@ -39,7 +39,7 @@ npm i -S express pg postgres-migrations
   ...
 ```
 
-  ### Install devDependencies 
+### Install devDependencies
 
 ```
 npx eslint --init
@@ -50,6 +50,7 @@ npm i -D nodemon
 ```
 
 ### Project devDependencies
+
 ```
 // package.json
 ...
@@ -64,6 +65,7 @@ npm i -D nodemon
 ```
 
 ### Install Docker
+
 https://docs.docker.com/get-docker/
 
 ### Create and Run postgres image
@@ -73,6 +75,7 @@ docker run --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=password -d postgre
 ```
 
 ### Install pgAdmin4
+
 https://www.pgadmin.org/download/
 
 ### Add New Server in pgAdmin
@@ -84,8 +87,8 @@ https://www.pgadmin.org/download/
 
 ### Tests
 
+/_Following installation, ensure you cd to the music-library route, then type: _/
 
-/*Following installation, ensure you cd to the music-library route, then type: */
 ```
 npm test
 ```
@@ -105,24 +108,28 @@ http://localhost:4000/artists/
 http://localhost:4000/artists/:id
 
 ```
+
 - Where the URL parameter is ':id', replace this with the necessary integer.
-- You will need to specify the HTTP verb in Postman, such as 'POST' or 'GET' for the end point without the parameter.  
+- You will need to specify the HTTP verb in Postman, such as 'POST' or 'GET' for the end point without the parameter.
 - This will allow the controller functions 'createArtist' and 'readArtist' to be executed.
-- With the 'createArtist' function, you will need to use JSON in Postman.  Click 'Body', 'raw', and change 'text' to 'JSON', and then input as follows: 
+- With the 'createArtist' function, you will need to use JSON in Postman. Click 'Body', 'raw', and change 'text' to 'JSON', and then input as follows:
+
 ```
 {
   "name": "a name of your choice",
   "genre": "a genre of your choice"
 }
-``` 
+```
 
 - The 'GET', 'PATCH', and 'DELETE' for the end point with the parameter relate to the controller functions 'singleArtistById', 'patchArtistById', and 'deleteArtistById'.
 - You will need to specify the appropriate HTTP verb in Postman relative to the controller function used, i.e. 'GET' for 'singleArtistById'.
 - 'GET' and 'DELETE' will only require the id parameter in the URL of the record you want to retrieve or delete.
-- 'PATCH' will require the ':id' as well as the information you want to change.  For example, if you wanted to change only the 'name' field, you would send JSON in the request body as follows:
+- 'PATCH' will require the ':id' as well as the information you want to change. For example, if you wanted to change only the 'name' field, you would send JSON in the request body as follows:
+
 ```
 {
   "name": "Jimmy Hendrix"
 }
 ```
+
 The above will replace only the 'name' field of the 'id' specified in the URL parameter ':id'.

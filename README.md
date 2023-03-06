@@ -1,86 +1,128 @@
 ## Project title
 
-Music Library - SQL, Databases, Express.js, Routing.
+Music Library
 
-### API flow of HTML request:
+### Project Description
 
-| API flow           | Purpose                                   |
-| ------------------ | ----------------------------------------- |
-| index.js           | process config env                        |
-| src/app.js         | process routers                           |
-| src/routes/\*      | process get/post/put/patch controllers    |
-| src/controllers/\* | process controllers and response |
+This project aims to create a RESTful API that allows users to perform CRUD (Create, Read, Update, Delete) operations on an artists table and an albums table in a PostgreSQL database.  The database is contained in a Docker container using the official postgres image.  The project includes migration tables in the root of the project on Node; scripts for creating and dropping the database (dropping only during testing), and a migrate folder to choose whether to run the .env or .env.test file.  The project also includes controllers, routes, app.js, and utilises integration testing via Supertest, Mocha, and Chai.
 
-### Database setup for each test:
+With this API, users can add, retrieve, update, and delete artists and albums from the database using HTTP methods, such as GET, POST, PATCH, and DELETE.
 
-To ensure tests have a new database created each time we run a test.
+The API is built using Node.js, Express.js, pg, and postgres-migrations.  The project is fully tested using the Mocha testing framework and the Chai assertion library, which ensures that the API works as expected and prevents regression bugs.
 
-```
-// package.json
- ...
- "scripts": {
-    "migrate": "node scripts/migrate.js",
-    "prestart": "node scripts/create-database.js && npm run migrate",
-    "start": "nodemon -r dotenv/config index.js",
-    "pretest": "node scripts/create-database.js test && npm run migrate test",
-    "test": "mocha tests/**/*.js --exit --recursive --timeout 60000 --file ./scripts/test-setup.js",
-    "posttest": "node scripts/drop-database.js test"
-  },
-  ...
-```
+Overall, this project provides a robust an efficient solution for managing artists and albums in a PostgreSQL database through a RESTful API, with proper testing and documentation for each of use and maintenance.
 
-### A top-level directory layout
-
-    .
-    ├── migrations         # Setup databases before each test
-    ├── scripts            # Scripts for migrations
-    ├── src
-    │      ├── routes      # Source of routers
-    │      ├── controllers # Source of request handlers
-    │      └── db          # define query of pg
-    ├── tests              # test files for requests
-    └── README.md
-
-## Installation
+## Installation of music library
 
 ```
 $ git clone https://github.com/lewsmit2/music-library.git 
 $ cd music-library
-$ npm install
+$ npm init -y
 ```
 
-## API Reference
+  ### Install Dependencies 
 
+```
+npm i -S express pg postgres-migrations
+```
+
+### Project Dependencies
+
+```
+// package.json
+...
+  "dependencies": {
+    "express": "^4.18.2",
+    "pg": "^8.9.0",
+    "postgres-migrations": "^5.3.0"
+  }
+  ...
+```
+
+  ### Install devDependencies 
+
+```
+npx eslint --init
+npx prettier --write .
+npm i -D mocha chai supertest
+npm i -D dotenv
+npm i -D nodemon
+```
+
+### Project devDependencies
 ```
 // package.json
 ...
   "devDependencies": {
     "chai": "^4.3.7",
     "dotenv": "^16.0.3",
+    "eslint": "^8.34.0",
     "mocha": "^10.2.0",
     "nodemon": "^2.0.20",
     "supertest": "^6.3.3"
-  },
-  ...
+...
 ```
 
-## Tests
+### Install Docker
+https://docs.docker.com/get-docker/
+
+### Create and Run postgres image
 
 ```
-open terminal and go to directory 'music-library', then
-$ npm test
+docker run --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=password -d postgres
 ```
 
-## How to use?
+### Install pgAdmin4
+https://www.pgadmin.org/download/
 
-From this exercise, you may learn how to handle request for CRUD operation to relational database.
+### Add New Server in pgAdmin
 
-### Recommended Reading List
+- Click 'Add new server',
+- Hostname/address: localhost
+- User: postgres
+- Password: // password of your choice
 
-- [Node-postgres](https://node-postgres.com/)
-- [Docker in 5 minutes](https://www.youtube.com/watch?v=_dfLOzuIg2o)
-- [Docker installation](https://docs.docker.com/get-docker/)
-- [pgAdmin4 installation](https://www.pgadmin.org/download/) 
-- [Documentation - Dotenv](https://github.com/motdotla/dotenv/blob/master/README.md)
-- [Documentation - Nodemon](https://www.npmjs.com/package/nodemon)
-- [Preventing SQL Injection in Node.js](https://www.veracode.com/blog/secure-development/how-prevent-sql-injection-nodejs)
+### Tests
+
+
+/*Following installation, ensure you cd to the music-library route, then type: */
+```
+npm test
+```
+
+### How to use?
+
+```
+npm start
+```
+
+Following this, you can access via Postman Desktop at http://localhost:4000/{appropriateRoute}.
+
+For example, the routes for artist are contained in /src/routes/artist and can be accessed and or manipulated through the following URLs:
+
+```
+http://localhost:4000/artists/
+http://localhost:4000/artists/:id
+
+```
+- Where the URL parameter is ':id', replace this with the necessary integer.
+- You will need to specify the HTTP verb in Postman, such as 'POST' or 'GET' for the end point without the parameter.  
+- This will allow the controller functions 'createArtist' and 'readArtist' to be executed.
+- With the 'createArtist' function, you will need to use JSON in Postman.  Click 'Body', 'raw', and change 'text' to 'JSON', and then input as follows: 
+```
+{
+  "name": "a name of your choice",
+  "genre": "a genre of your choice"
+}
+``` 
+
+- The 'GET', 'PATCH', and 'DELETE' for the end point with the parameter relate to the controller functions 'singleArtistById', 'patchArtistById', and 'deleteArtistById'.
+- You will need to specify the appropriate HTTP verb in Postman relative to the controller function used, i.e. 'GET' for 'singleArtistById'.
+- 'GET' and 'DELETE' will only require the id parameter in the URL of the record you want to retrieve or delete.
+- 'PATCH' will require the ':id' as well as the information you want to change.  For example, if you wanted to change only the 'name' field, you would send JSON in the request body as follows:
+```
+{
+  "name": "Jimmy Hendrix"
+}
+```
+The above will replace only the 'name' field of the 'id' specified in the URL parameter ':id'.

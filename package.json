@@ -12,6 +12,9 @@
     
     "posttest": "node scripts/drop-database.js test"
   },
+  "engines": {
+    "node": ">=14 <15"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lewsmit2/music-library.git"

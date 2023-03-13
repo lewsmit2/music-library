@@ -8,10 +8,8 @@ describe("create album", () => {
   beforeEach(async () => {
     const { rows } = await db.query(
       "INSERT INTO Artists (name, genre) VALUES ( $1, $2 ) RETURNING *",
-      [
-        "Kurt Cobain",
-        "rock",
-      ]);
+      ["Kurt Cobain", "rock"]
+    );
 
     artistId = rows[0].id;
   });
@@ -19,7 +17,6 @@ describe("create album", () => {
   describe("/albums", () => {
     describe("POST", () => {
       it("creates a new album in the database", async () => {
-
         const { status, body } = await request(app)
           .post(`/artists/${artistId}/albums`)
           .send({
@@ -33,9 +30,7 @@ describe("create album", () => {
 
         const {
           rows: [albumData],
-        } = await db.query("SELECT * FROM Albums WHERE id = $1", [
-          body.id,
-        ]);
+        } = await db.query("SELECT * FROM Albums WHERE id = $1", [body.id]);
 
         expect(albumData.artistid).to.equal(artistId);
         expect(albumData.name).to.equal("Nevermind");

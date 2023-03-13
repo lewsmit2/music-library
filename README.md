@@ -156,18 +156,18 @@ The above will replace only the 'name' field of the 'id' specified in the URL pa
 
 ### Routes Available
 
-| artist verb | artist route | reason |
-| ----------- | ------------ | ------ |
-| GET | https://localhost:4000/artists | to retrieve all artists |
-| GET | https://localhost:4000/artists/{id} | to retrieve a single artist |
-| POST | https://localhost:4000/artists | to create an single artist |
-| POST | https://localhost:4000/artists/{id}/albums | to create an album belonging to an artist |
-| PATCH | https://localhost:4000/artists/{id} | to update a single artist by Id |
-| DELETE | https://localhost:4000/artists/{id} | to delete a single artist by Id |
+| artist verb | artist route                               | reason                                    |
+| ----------- | ------------------------------------------ | ----------------------------------------- |
+| GET         | https://localhost:4000/artists             | to retrieve all artists                   |
+| GET         | https://localhost:4000/artists/{id}        | to retrieve a single artist               |
+| POST        | https://localhost:4000/artists             | to create an single artist                |
+| POST        | https://localhost:4000/artists/{id}/albums | to create an album belonging to an artist |
+| PATCH       | https://localhost:4000/artists/{id}        | to update a single artist by Id           |
+| DELETE      | https://localhost:4000/artists/{id}        | to delete a single artist by Id           |
 
-| album verb | album route | reason |
-| ----------- | ------------ | ------ |
-| GET | https://localhost:4000/albums | to retrieve all albums |
-| GET | https://localhost:4000/albums/{id} | to retrieve a single album |
-| PATCH | https://localhost:4000/albums/{id} | to update a single album by Id |
-| DELETE | https://localhost:4000/albums/{id} | to delete a single album by Id |
+| album verb | album route                        | reason                         |
+| ---------- | ---------------------------------- | ------------------------------ |
+| GET        | https://localhost:4000/albums      | to retrieve all albums         |
+| GET        | https://localhost:4000/albums/{id} | to retrieve a single album     |
+| PATCH      | https://localhost:4000/albums/{id} | to update a single album by Id |
+| DELETE     | https://localhost:4000/albums/{id} | to delete a single album by Id |

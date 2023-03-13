@@ -5,7 +5,6 @@ const app = require("../src/app");
 
 describe("Delete Album", () => {
   let album;
-  let artist;
   let singleArtistId;
   beforeEach(async () => {
     let albumData;
@@ -17,8 +16,7 @@ describe("Delete Album", () => {
         ["Nevermind", "rock"]
       ),
     ]);
-    artist = artistData.map(({ rows }) => rows[0]);
-    singleArtistId = artist[0].id;
+    singleArtistId = artistData[0].rows[0].id;
 
     albumData = await Promise.all([
       db.query(

@@ -12,18 +12,12 @@ The API is built using Node.js, Express.js, pg, and postgres-migrations. The pro
 
 Overall, this project provides a robust an efficient solution for managing artists and albums in a PostgreSQL database through a RESTful API, with proper testing and documentation for each of use and maintenance.
 
-## Installation of music library
+## Installation of music library and dependencies
 
 ```
 $ git clone https://github.com/lewsmit2/music-library.git
 $ cd music-library
-$ npm init -y
-```
-
-### Install Dependencies
-
-```
-npm i -S express pg postgres-migrations
+$ npm install
 ```
 
 ### Project Dependencies
@@ -61,6 +55,32 @@ npm i -D nodemon
     "mocha": "^10.2.0",
     "nodemon": "^2.0.20",
     "supertest": "^6.3.3"
+...
+```
+
+### .env Files
+
+The following env files are necessary for informing the configuration and execution of the scripts.
+
+```
+// create a .env file with the following:
+...
+PGUSER=postgres
+PGHOST=localhost
+PGPASSWORD=changeToAUniquePassword
+PGDATABASE=music_library_dev
+PGPORT=5432
+...
+```
+
+```
+// create a .env.test file with the following:
+...
+PGUSER=postgres
+PGHOST=localhost
+PGPASSWORD=changeToUniquePassword
+PGDATABASE=music_library_api_test
+PGPORT=5432
 ...
 ```
 
@@ -133,3 +153,21 @@ http://localhost:4000/artists/:id
 ```
 
 The above will replace only the 'name' field of the 'id' specified in the URL parameter ':id'.
+
+### Routes Available
+
+| artist verb | artist route | reason |
+| ----------- | ------------ | ------ |
+| GET | https://localhost:4000/artists | to retrieve all artists |
+| GET | https://localhost:4000/artists/{id} | to retrieve a single artist |
+| POST | https://localhost:4000/artists | to create an single artist |
+| POST | https://localhost:4000/artists/{id}/albums | to create an album belonging to an artist |
+| PATCH | https://localhost:4000/artists/{id} | to update a single artist by Id |
+| DELETE | https://localhost:4000/artists/{id} | to delete a single artist by Id |
+
+| album verb | album route | reason |
+| ----------- | ------------ | ------ |
+| GET | https://localhost:4000/albums | to retrieve all albums |
+| GET | https://localhost:4000/albums/{id} | to retrieve a single album |
+| PATCH | https://localhost:4000/albums/{id} | to update a single album by Id |
+| DELETE | https://localhost:4000/albums/{id} | to delete a single album by Id |

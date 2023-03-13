@@ -8,15 +8,13 @@ describe("Delete Album", () => {
   let singleArtistId;
   beforeEach(async () => {
     let albumData;
-    let artistData;
 
-    artistData = await Promise.all([
-      db.query(
+    const { rows } = await db.query(
         `INSERT INTO Artists (name, genre) VALUES ($1, $2) RETURNING *`,
         ["Nevermind", "rock"]
-      ),
-    ]);
-    singleArtistId = artistData[0].rows[0].id;
+      );
+    
+    singleArtistId = rows[0].id;
 
     albumData = await Promise.all([
       db.query(

@@ -10,7 +10,6 @@ describe("Delete Artist", () => {
       "INSERT INTO Artists (name, genre) VALUES( $1, $2 ) RETURNING *",
       ["Tame Impala", "rock"]
     );
-
     artist = rows[0];
   });
 
